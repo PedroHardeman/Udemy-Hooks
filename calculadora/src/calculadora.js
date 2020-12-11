@@ -6,9 +6,7 @@ import {
 import CalculadoraService from './calculadora.service';
 
 function Calculadora() {
-
   const [calcular, concatenarNumero, SOMA, SUBTRACAO, DIVISAO, MULTIPLICACAO] = CalculadoraService();
-
   const [txtNumeros, setTxtNumeros] = useState('0');
   const [numero1, setNumero1] = useState('0');
   const [numero2, setNumero2] = useState(null);
@@ -48,6 +46,7 @@ function Calculadora() {
     }
     const resultado = calcular(parseFloat(numero1), parseFloat(numero2), operacao);
     setTxtNumeros(resultado);
+    setNumero1(resultado.toString());
   }
 
   function limpar() {
@@ -61,102 +60,87 @@ function Calculadora() {
     <Jumbotron style={{
       background: 'transparent !important',
       backgroundColor: '#007bff',
-      padding: '10%',
-      margin: '10%',
-      // width: '400px'
+      padding: '2%',
+      margin: '25% 35%',
     }}>
       <Container >
         <Row>
           <Col xs="3">
-            <Button variant="danger"
-              onClick={limpar}>C</Button>
+            <Button variant="danger" onClick={limpar}>
+                C
+            </Button>
           </Col>
           <Col xs="9">
-            <Form.Control type="text"
+            <Form.Control
+              type="text"
               name="txtNumeros"
               className="text-right"
               readOnly="readonly"
               value={txtNumeros}
-              data-testid="txtNumeros" />
+              data-testid="txtNumeros"
+            />
           </Col>
         </Row>
 
         <Row>
           <Col>
-            <Button variant="light"
-              onClick={() => adicionarNumero('7')}>7</Button>
+            <Button variant="light" onClick={() => adicionarNumero('7')}>7</Button>
           </Col>
           <Col>
-            <Button variant="light"
-              onClick={() => adicionarNumero('8')}>8</Button>
+            <Button variant="light" onClick={() => adicionarNumero('8')}>8</Button>
           </Col>
           <Col>
-            <Button variant="light"
-              onClick={() => adicionarNumero('9')}>9</Button>
+            <Button variant="light" onClick={() => adicionarNumero('9')}>9</Button>
           </Col>
           <Col>
-            <Button variant="warning"
-              onClick={() => definirOperacao(DIVISAO)}>/</Button>
+            <Button variant="warning" className={operacao === '/' ? 'ativo' : ''} onClick={() => definirOperacao(DIVISAO)}>/</Button>
           </Col>
         </Row>
 
         <Row>
           <Col>
-            <Button variant="light"
-              onClick={() => adicionarNumero('4')}>4</Button>
+            <Button variant="light" onClick={() => adicionarNumero('4')}>4</Button>
           </Col>
           <Col>
-            <Button variant="light"
-              onClick={() => adicionarNumero('5')}>5</Button>
+            <Button variant="light" onClick={() => adicionarNumero('5')}>5</Button>
           </Col>
           <Col>
-            <Button variant="light"
-              onClick={() => adicionarNumero('6')}>6</Button>
+            <Button variant="light" onClick={() => adicionarNumero('6')}>6</Button>
           </Col>
           <Col>
-            <Button variant="warning"
-              onClick={() => definirOperacao(MULTIPLICACAO)}>*</Button>
+            <Button variant="warning" className={operacao === '*' ? 'ativo' : ''} onClick={() => definirOperacao(MULTIPLICACAO)}>*</Button>
           </Col>
         </Row>
 
         <Row>
           <Col>
-            <Button variant="light"
-              onClick={() => adicionarNumero('1')}>1</Button>
+            <Button variant="light" onClick={() => adicionarNumero('1')}>1</Button>
           </Col>
           <Col>
-            <Button variant="light"
-              onClick={() => adicionarNumero('2')}>2</Button>
+            <Button variant="light" onClick={() => adicionarNumero('2')}>2</Button>
           </Col>
           <Col>
-            <Button variant="light"
-              onClick={() => adicionarNumero('3')}>3</Button>
+            <Button variant="light" onClick={() => adicionarNumero('3')}>3</Button>
           </Col>
           <Col>
-            <Button variant="warning"
-              onClick={() => definirOperacao(SUBTRACAO)}>-</Button>
+            <Button variant="warning" className={operacao === '-' ? 'ativo' : ''} onClick={() => definirOperacao(SUBTRACAO)}>-</Button>
           </Col>
         </Row>
 
         <Row>
           <Col>
-            <Button variant="light"
-              onClick={() => adicionarNumero('0')}>0</Button>
+            <Button variant="light" onClick={() => adicionarNumero('0')}>0</Button>
           </Col>
           <Col>
-            <Button variant="light"
-              onClick={() => adicionarNumero('.')}>.</Button>
+            <Button variant="light" onClick={() => adicionarNumero('.')}>.</Button>
           </Col>
           <Col>
-            <Button variant="success"
-              onClick={acaoCalcular}>=</Button>
+            <Button variant="success" onClick={acaoCalcular}>=</Button>
           </Col>
           <Col>
-            <Button variant="warning"
-              onClick={() => definirOperacao(SOMA)}>+</Button>
+            <Button variant="warning" className={operacao === '+' ? 'ativo' : ''} onClick={() => definirOperacao(SOMA)}>+</Button>
           </Col>
         </Row>
-
       </Container>
     </Jumbotron>
   );
